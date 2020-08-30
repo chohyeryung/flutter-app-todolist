@@ -83,7 +83,7 @@ class _TodoListPageState extends State<TodoListPage> {
   Widget _buildItemWidget(DocumentSnapshot doc){
     final todo=Todo(doc['title'], isDone:doc['isDone']);
     return ListTile(
-      onTap:()=>_toggleTodo(todo),
+      onTap:()=>_toggleTodo(doc),
       title:Text(
         todo.title,
         style:todo.isDone
@@ -104,10 +104,10 @@ class _TodoListPageState extends State<TodoListPage> {
   void _addTodo(Todo todo){
     Firestore.instance.collection('todo').add({'title':todo.title, 'isDone':todo.isDone});
     _todoController.text='';
-    setState(() {
-      _items.add(todo);
-      _todoController.text='';
-    });
+//    setState(() {
+//      _items.add(todo);
+//      _todoController.text='';
+//    });
   }
 
   //할 일 삭제 메서드
@@ -118,9 +118,9 @@ class _TodoListPageState extends State<TodoListPage> {
   }
 
   //할 일 완료/미완료 메서드
-  void _toggleTodo(Todo todo){
-    setState(() {
-      todo.isDone=!todo.isDone;
+  void _toggleTodo(DocumentSnapshot doc){
+    Firestore.instance.collection('todo').document(doc.documentID).updateData({
+      'isDone':!doc['isDone'],
     });
   }
 }
