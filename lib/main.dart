@@ -54,7 +54,7 @@ class _TodoListPageState extends State<TodoListPage> {
                 ),
                 RaisedButton(
                   child:Text('추가'),
-                  onPressed:(){},
+                  onPressed:()=>_addTodo(Todo(_todoController.text)),
                 )
               ],
             ),
@@ -71,7 +71,7 @@ class _TodoListPageState extends State<TodoListPage> {
 
   Widget _buildItemWidget(Todo todo){
     return ListTile(
-      onTap:(){},
+      onTap:()=>_toggleTodo(todo),
       title:Text(
         todo.title,
         style:todo.isDone
@@ -83,7 +83,7 @@ class _TodoListPageState extends State<TodoListPage> {
       ),
       trailing:IconButton(
         icon:Icon(Icons.delete_forever),
-        onPressed:(){},
+        onPressed:()=>_deleteTodo(todo),
       ),
     );
   }
