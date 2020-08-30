@@ -60,4 +60,8 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // add SDKs for desired Firebase products
+    // https://firebase.google.com/docs/android/setup#available-librari
 }
+
+apply plugin: 'com.google.gms.google-services'
