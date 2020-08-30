@@ -27,7 +27,6 @@ class TodoListPage extends StatefulWidget {
 }
 
 class _TodoListPageState extends State<TodoListPage> {
-  final _items=<Todo>[];
 
   var _todoController=TextEditingController();
 
@@ -95,7 +94,7 @@ class _TodoListPageState extends State<TodoListPage> {
       ),
       trailing:IconButton(
         icon:Icon(Icons.delete_forever),
-        onPressed:()=>_deleteTodo(todo),
+        onPressed:()=>_deleteTodo(doc),
       ),
     );
   }
@@ -111,10 +110,11 @@ class _TodoListPageState extends State<TodoListPage> {
   }
 
   //할 일 삭제 메서드
-  void _deleteTodo(Todo todo){
-    setState(() {
-      _items.remove(todo);
-    });
+  void _deleteTodo(DocumentSnapshot doc){
+    Firestore.instance.collection('todo').document(doc.documentID).delete();
+//    setState(() {
+//      _items.remove(todo);
+//    });
   }
 
   //할 일 완료/미완료 메서드
